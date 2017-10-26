@@ -27,3 +27,4 @@ comboItem = itemId . itemAndQuantity
 
 comboQuantity :: ComboUnit -> Int
 comboQuantity = itemQuantity . itemAndQuantity
+
