@@ -1,15 +1,14 @@
 module Autocombo.Types where
 
-type ItemId       = String
-type ComboCatalog = [Combo]
-type ItemCatalog  = [ItemId]
+import Data.Map.Strict as M
 
-data ComboUnit = ComboUnit 
-  { itemAndQuantity :: ItemAndQuantity
-  , primeNumber :: Integer
-  } deriving Show
+type ItemId          = String
+type ComboCatalog    = [Combo]
+type ItemCatalog     = [ItemId]
+type ItemAndQuantity = (ItemId, Int)
+type Basket          = [ItemAndQuantity]
 
-data Offer = FreeItem ItemId | Discount Double deriving Show
+type ProductMap = M.Map ItemId Integer
 
 data Combo = Combo 
   { comboUnits  :: [ComboUnit]
@@ -17,13 +16,11 @@ data Combo = Combo
   , comboNumber :: Integer
   } deriving Show
 
-data ItemAndQuantity = ItemAndQuantity
-  { itemId :: ItemId
-  , itemQuantity :: Int
+data ComboUnit = ComboUnit 
+  { itemId        :: ItemId
+  , itemQuantity  :: Int
+  , productNumber :: Integer
   } deriving Show
 
-comboItem :: ComboUnit -> ItemId
-comboItem = itemId . itemAndQuantity
+data Offer = FreeItem ItemId | Discount Double deriving Show
 
-comboQuantity :: ComboUnit -> Int
-comboQuantity = itemQuantity . itemAndQuantity
