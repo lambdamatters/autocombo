@@ -1,6 +1,8 @@
 module Autocombo.Types where
 
-type ItemId = String
+type ItemId       = String
+type ComboCatalog = [Combo]
+type ItemCatalog  = [ItemId]
 
 data ComboUnit = ComboUnit 
   { itemAndQuantity :: ItemAndQuantity
@@ -10,12 +12,10 @@ data ComboUnit = ComboUnit
 data Offer = FreeItem ItemId | Discount Double deriving Show
 
 data Combo = Combo 
-  { comboUnits :: [ComboUnit]
-  , offer :: Offer
+  { comboUnits  :: [ComboUnit]
+  , offer       :: Offer
+  , comboNumber :: Integer
   } deriving Show
-
-type ComboCatalog = [Combo]
-type ItemCatalog = [ItemId]
 
 data ItemAndQuantity = ItemAndQuantity
   { itemId :: ItemId
@@ -27,3 +27,4 @@ comboItem = itemId . itemAndQuantity
 
 comboQuantity :: ComboUnit -> Int
 comboQuantity = itemQuantity . itemAndQuantity
+
